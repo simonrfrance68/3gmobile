@@ -1,0 +1,38 @@
+<?php
+
+if($block->getFormData() != '') {
+
+	$params = $block->getFormData();
+
+
+?>
+
+<b><?php echo 'You will be redirected to Worldpay in a few seconds.'; ?></b>
+
+<form name="worldpay_checkout" id="worldpay_checkout" action="<?php echo $block->getFormAction();?>" method="POST">
+
+<?php if (is_array($params)): ?>
+
+    <?php foreach ($params as $name => $value): ?>
+
+        <input type="hidden" name="<?php echo $name; ?>" <?php if (!is_null($value)) { echo 'value="'. $value . '"'; } ?> />
+
+    <?php endforeach; ?>
+
+<?php endif; ?>
+
+</form>
+
+<script type="text/javascript">
+
+//<![CDATA[
+
+    var paymentform = document.getElementById('worldpay_checkout');
+
+    window.onload = paymentform.submit();
+
+//]]>
+
+</script>
+
+<?php } ?>

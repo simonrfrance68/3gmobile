@@ -1,0 +1,2 @@
+[18-Apr-2022 19:50:43 UTC] PHP Notice:  Undefined index: transId in /home/gmobilec/public_html/wpresponse/wporder.php on line 22
+[18-Apr-2022 19:50:43 UTC] PHP Notice:  Undefined index: cardType in /home/gmobilec/public_html/wpresponse/wporder.php on line 24

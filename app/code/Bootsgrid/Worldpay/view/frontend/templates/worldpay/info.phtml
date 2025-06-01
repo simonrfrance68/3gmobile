@@ -1,0 +1,17 @@
+<?php
+/**
+ * 
+ * @category   Bootsgrid
+ * @package    Bootsgrid_Worldpay
+ * @copyright  Copyright (c) 2017-2018 Bootsgrid (https://www.bootsgrid.com)
+ */
+?>
+<?php 
+	echo $block->getMethodTitle() . '<br/>';
+	if ($this->getInfo()->getLastTransId() == '') {
+		echo '<em>' . $block->getMethodCode().':You will be redirected to Worldpay website when you place an order.' . '</em>';
+	} else {
+	    echo'Credit Card Type: ', $this->getInfo()->getCcType() . '<br/>';
+		echo'Worldpay Transaction ID: ', $this->getInfo()->getLastTransId() . '<br/>';
+	}
+?>

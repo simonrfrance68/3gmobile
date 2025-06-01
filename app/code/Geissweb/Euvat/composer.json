@@ -1,0 +1,30 @@
+{
+  "name": "geissweb/module-euvat",
+  "type": "magento2-module",
+  "version": "1.5.0",
+  "description": "EU VAT Enhanced Magento2 Module.",
+  "license": "Proprietary License: https://www.geissweb.de/legal-information/eula",
+  "require": {
+    "ext-curl": "*",
+    "ext-soap": "*",
+    "ext-json": "*"
+  },
+  "autoload": {
+    "files": [
+      "registration.php"
+    ],
+    "psr-4": {
+      "Geissweb\\Euvat\\": ""
+    }
+  },
+  "authors": [
+    {
+      "name": "Sven Geiß",
+      "email": "info@geissweb.de"
+    }
+  ],
+  "extra": {
+    "_gw_magento_module_name": "Geissweb_Euvat",
+    "_gw_magento_codepool": "app/code"
+  }
+}

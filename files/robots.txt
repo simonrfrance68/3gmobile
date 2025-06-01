@@ -1,0 +1,27 @@
+User-agent:  *
+
+Disallow:
+Disallow: /cgi-bin/
+Disallow: /wp-admin/
+Disallow: /linkout/
+Disallow: /recommended/
+Disallow: /comments/feed/
+Disallow: /trackback/
+Disallow: /catalogsearch/
+
+User-agent: NinjaBot
+Allow: /
+
+User-agent: Mediapartners-Google*
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /wp-content/uploads/
+
+User-agent: Adsbot-Google
+Allow: /
+ 
+User-agent: Googlebot-Mobile
+Allow: /
+
+Sitemap: https://www.3gmobilecctv.com/sitemap.xml

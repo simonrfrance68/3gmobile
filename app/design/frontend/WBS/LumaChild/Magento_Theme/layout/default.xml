@@ -1,0 +1,17 @@
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <!-- Remove Footer Links Block -->
+        <referenceBlock name="footer_links" remove="true" />
+        <referenceBlock name="form.subscribe" remove="true" />
+         <!-- Move Navigation Menu After Logo -->
+        <!-- Move Navigation for Desktop
+        <move element="catalog.topnav" destination="header-wrapper" after="logo" as="desktop_topnav" />-->
+
+        <!-- Duplicate Top Menu for Mobile -->
+        <referenceContainer name="header-wrapper">
+            <block class="Magento\Theme\Block\Html\Topmenu" name="mobile.topnav" as="mobile_topnav" template="Magento_Theme::html/topmenu.phtml"  after="logo" />
+             <block class="Magento\Wishlist\Block\Link" name="wishlist_link" template="Magento_Wishlist::link.phtml" after="search" />
+        </referenceContainer>
+    
+    </body>
+</page>

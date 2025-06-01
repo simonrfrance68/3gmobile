@@ -1,0 +1,34 @@
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<if args="visible()">
+    <if args="typeof address().company !== 'undefined' && address().company && address().company.length > 0"><text args="address().company "></text><br/></if>
+    <text args="address().prefix"></text> <text args="address().firstname"></text> <text args="address().middlename"></text>
+    <text args="address().lastname"></text> <text args="address().suffix"></text><br/>
+    <text args="_.values(address().street).join(', ')"></text><br/>
+    <text args="address().city "></text>, <span html="address().region"></span> <text args="address().postcode"></text><br/>
+    <text args="getCountryName(address().countryId)"></text><br/>
+    <if args="typeof address().vatId !== 'undefined' && address().vatId && address().vatId.length > 0"><text args="address().vatId "></text><br/></if>
+    <a if="address().telephone" attr="'href': 'tel:' + address().telephone" text="address().telephone"></a><br/>
+
+    <each args="data: address().customAttributes, as: 'element'">
+        <each args="data: Object.keys(element), as: 'attribute'">
+            <if args="typeof element[attribute] === 'object'">
+                <if args="element[attribute].label">
+                    <text args="element[attribute].label"></text>
+                </if>
+                <ifnot args="element[attribute].label">
+                    <if args="element[attribute].value">
+                        <text args="element[attribute].value"></text>
+                    </if>
+                </ifnot>
+            </if>
+            <if args="typeof element[attribute] === 'string'">
+                <text args="element[attribute]"></text>
+            </if><br/>
+        </each>
+    </each>
+</if>

@@ -1,0 +1,100 @@
+<?php
+/**
+ * Blog recent posts widget slider
+ */
+?>
+
+<?php
+$width = (int)$block->getBackgroundImageWidth() ?: 700;
+$imageHelper = $this->helper(\Magefan\Blog\Helper\Image::class);
+$_postCollection = $block->getPostCollection();
+$descLength = $block->getDescLength();
+
+?>
+
+<?php if ($_postCollection->count()) { ?>
+<div class="post-slider-wrapper blog-widget-recent">
+    <h3 class="title"><?= $block->escapeHtml($block->getTitle()) ?></h3>
+    <div class="post-slider container">
+        <?php foreach ($_postCollection as $_post) { ?>
+            <?php
+                $_postUrl = $block->escapeUrl($_post->getPostUrl());
+                $_postName = $block->escapeHtml($_post->getTitle());
+                $desc = $_post->getMetaDescription();
+        		if(strlen($desc)> $descLength ) { 
+        			$strCutDesc = substr($desc, 0, $descLength);
+        			$desc = substr($strCutDesc, 0, strrpos($strCutDesc, ' ')).'&hellip;';
+        		}
+        		$desc = $this->stripTags($desc,null,true);
+            ?>
+            <div class="post-slide">
+                
+
+                <div class="post-content">
+                    <?php $featuredImage = $_post->getFeaturedListImg() ?: $_post->getFeaturedImg(); ?>
+                    <?php if ($featuredImage) { ?>
+                        <?php
+                            $featuredImage = $imageHelper->init($featuredImage)->resize($width, null, false);
+                            $featuredImgAlt = $_post->getData('featured_list_img_alt') ?: $_post->getData('featured_img_alt') ?: $_postName;
+                        ?>
+                        <div class="post-ftimg-hld">
+                            <a href="<?= /*@noEscape*/ $_postUrl ?>" title="<?= /*@noEscape*/ $_postName ?>">
+                                <img src="<?= $block->escapeHtml($featuredImage) ?>"
+                                     alt="<?= $block->escapeHtml($featuredImgAlt) ?>" />
+                            </a>
+                        </div>
+                    <?php } ?>
+                </div>
+                <?php if ($_post->isPublishDateEnabled()) { ?>
+                    <?php
+                    $formattedDate = date('m/d/Y', strtotime($_post->getPublishDate()));
+                    ?>
+                    <div class="item post-posed-date">
+                        <span class="value"><?= $block->escapeHtml($formattedDate) ?></span>
+                    </div>
+                <?php } ?>
+                <div class="post-header">
+                    <div class="post-title">
+                        <a class="post-item-link"
+                           href="<?= /*@noEscape*/ $_postUrl ?>">
+                            <?= /*@noEscape*/ $_postName ?>
+                        </a>
+                    </div>
+                </div>
+                 
+                    <div class="blog-desc"><?php echo $desc ?></div>
+            </div>
+        <?php } ?>
+    </div>
+</div>
+
+<?php $script = "
+require(['jquery', 'slick'], function($) {
+    $(document).ready(function() {
+        $('.post-slider').slick({
+            dots: false,
+            arrows: true,
+            infinite: true,
+            speed: 500,
+            slidesToShow: 3,
+            slidesToScroll: 1,
+            responsive: [
+                {
+                    breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 2
+                    }
+                },
+                {
+                    breakpoint: 600,
+                    settings: {
+                        slidesToShow: 1
+                    }
+                }
+            ]
+        });
+    });
+});
+"; ?>
+<?= /* @noEscape */ $mfSecureRenderer->renderTag('script', [], $script, false) ?>
+<?php } ?>

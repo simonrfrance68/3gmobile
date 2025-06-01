@@ -1,0 +1,16 @@
+<?php
+/**
+ * 
+ * @category   Magento
+ * @package    Bootsgrid_Worldpay
+ * @copyright  Copyright (c) 2017-2018 Bootsgrid (https://www.bootsgrid.com)
+ */
+?>
+<fieldset class="form-list">
+    <?php $_code=$this->getMethodCode() ?>
+    <ul id="payment_form_<?php echo $_code ?>" style="display:none">
+        <li>
+            <?php echo $this->__($_code.':You will be redirected to Worldpay website when you place an order.') ?>
+        </li>
+    </ul>
+</fieldset>

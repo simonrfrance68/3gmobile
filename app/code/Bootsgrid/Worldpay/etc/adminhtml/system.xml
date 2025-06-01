@@ -1,0 +1,100 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+<system>
+    <section id="payment" translate="label" sortOrder="345" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+        <group id="worldpay_cc" translate="label" sortOrder="100" type="text" showInDefault="1" showInWebsite="1">
+            <label>Worldpay Business Payment</label>
+            <field id="active" translate="label" sortOrder="1" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Enabled</label>
+                <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                <config_path>payment/worldpay_cc/active</config_path>
+            </field>            
+            <field id="title" translate="label" sortOrder="2" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Title</label>
+                <config_path>payment/worldpay_cc/title</config_path>
+            </field>
+            <field id="order_status" translate="label" type="select" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="0" canRestore="1">
+                <label>New Order Status</label>
+                <source_model>Magento\Sales\Model\Config\Source\Order\Status\Processing</source_model>
+                <config_path>payment/worldpay_cc/order_status</config_path>
+            </field>
+            <field id="transaction_mode" translate="label" sortOrder="4" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Environment Mode</label>
+                <source_model>Bootsgrid\Worldpay\Model\Source\WorldpayMode</source_model>
+                <config_path>payment/worldpay_cc/transaction_mode</config_path>
+            </field>
+            <field id="inst_id" translate="label" sortOrder="5" type="text" showInDefault="1" showInStore="1">
+                <label>Installation ID</label>
+            </field>
+            <field id="use_store_currency" translate="label" sortOrder="6" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Pay in store currency</label>
+                <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                <config_path>payment/worldpay_cc/use_store_currency</config_path>
+            </field>
+            <field id="pay_res_password" translate="label" sortOrder="7" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Payment Response password</label>
+            </field>
+            <field id="security_key" translate="label" sortOrder="8" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>MD5 secret</label>
+            </field>
+            <field id="signature_type" translate="label" sortOrder="9" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Signature Type</label>
+                <config_path>payment/worldpay_cc/signature_type</config_path>
+                <source_model>Bootsgrid\Worldpay\Model\Source\SignatureType</source_model>
+            </field>
+            <field id="signature_params" translate="label" sortOrder="8" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Signature parameters</label>
+                <config_path>payment/worldpay_cc/signature_params</config_path>
+            </field>
+            <field id="request_type" translate="label" sortOrder="9" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Request Type</label>
+                <config_path>payment/worldpay_cc/request_type</config_path>
+                <source_model>Bootsgrid\Worldpay\Model\Source\RequestType</source_model>
+            </field>
+            <field id="fix_contact" translate="label" sortOrder="10" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Fix contact</label>
+                <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                <config_path>payment/worldpay_cc/fix_contact</config_path>
+            </field>
+            <field id="hide_contact" translate="label" sortOrder="11" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Hide contact</label>
+                <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                <config_path>payment/worldpay_cc/hide_contact</config_path>
+            </field>
+            <field id="enable_online_operations" translate="label" sortOrder="12" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Enable online operations</label>
+                <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                <config_path>payment/worldpay_cc/enable_online_operations</config_path>
+            </field>
+            <field id="hide_language_select" translate="label" sortOrder="12" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Hide language select.</label>
+                <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+            </field>
+            <field id="admin_inst_id" translate="label" sortOrder="13" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Remote Admin Installation ID</label>
+            </field>
+            <field id="auth_password" translate="label" sortOrder="14" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Authorisation password</label>
+            </field>
+            <field id="allowspecific" translate="label" type="allowspecific" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="0" canRestore="1">
+                <label>Payment from applicable countries</label>
+                <source_model>Magento\Payment\Model\Config\Source\Allspecificcountries</source_model>
+                <config_path>payment/worldpay_cc/allowspecific</config_path>
+            </field>
+            <field id="specificcountry" translate="label" type="multiselect" sortOrder="16" showInDefault="1" showInWebsite="1" showInStore="0">
+                <label>Payment from Specific Countries</label>
+                <source_model>Magento\Directory\Model\Config\Source\Country</source_model>
+            </field>
+            <field id="sort_order" translate="label" type="text" sortOrder="17" showInDefault="1" showInWebsite="1" showInStore="0">
+                <label>Sort Order</label>
+                <frontend_class>validate-number</frontend_class>
+            </field>          
+            <field id="debug" translate="label" sortOrder="18" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Enable Debug</label>
+                <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                <config_path>payment/worldpay_cc/debug</config_path>
+            </field>
+        </group>
+    </section>
+</system>
+</config>

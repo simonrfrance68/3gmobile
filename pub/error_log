@@ -1,0 +1,79 @@
+[13-Dec-2019 10:34:27 UTC] PHP Fatal error:  Uncaught Magento\Framework\Exception\FileSystemException: Directory "/home/gmobilec/public_html/var/page_cache" cannot be created Warning!mkdir(): Permission denied in /home/gmobilec/public_html/vendor/magento/framework/Filesystem/Driver/File.php:225
+Stack trace:
+#0 /home/gmobilec/public_html/vendor/magento/framework/Filesystem/Driver/File.php(199): Magento\Framework\Filesystem\Driver\File->mkdirRecursive('/home/gmobilec/...', 511)
+#1 /home/gmobilec/public_html/vendor/magento/framework/Filesystem/Directory/Write.php(94): Magento\Framework\Filesystem\Driver\File->createDirectory('/home/gmobilec/...', 511)
+#2 /home/gmobilec/public_html/vendor/magento/framework/App/Cache/Frontend/Factory.php(116): Magento\Framework\Filesystem\Directory\Write->create('page_cache')
+#3 /home/gmobilec/public_html/vendor/magento/framework/App/Cache/Frontend/Pool.php(67): Magento\Framework\App\Cache\Frontend\Factory->create(Array)
+#4 /home/gmobilec/public_html/vendor/magento/framework/App/Cache/Frontend/Pool.php(146): Magento\Framewor in /home/gmobilec/public_html/vendor/magento/framework/Filesystem/Driver/File.php on line 225
+[13-Apr-2022 02:29:53 UTC] PHP Fatal error:  Uncaught Error: Class 'DOMDocument' not found in /home/gmobilec/public_html/vendor/magento/framework/Config/Dom.php:449
+Stack trace:
+#0 /home/gmobilec/public_html/vendor/magento/framework/Config/Dom.php(116): Magento\Framework\Config\Dom->_initDom('<?xml version="...')
+#1 /home/gmobilec/public_html/vendor/magento/framework/ObjectManager/Config/Reader/Dom.php(70): Magento\Framework\Config\Dom->__construct('<?xml version="...', Object(Magento\Framework\App\Arguments\ValidationState), Array, 'xsi:type', NULL)
+#2 /home/gmobilec/public_html/vendor/magento/framework/Config/Reader/Filesystem.php(151): Magento\Framework\ObjectManager\Config\Reader\Dom->_createConfigMerger('Magento\\Framewo...', '<?xml version="...')
+#3 /home/gmobilec/public_html/vendor/magento/framework/Config/Reader/Filesystem.php(132): Magento\Framework\Config\Reader\Filesystem->_readFiles(Object(Magento\Framework\Config\FileIterator))
+#4 /home/gmobilec/public_html/vendor/magento/framework/App/ObjectManagerFactory.php(279): Magento\Framework\Config in /home/gmobilec/public_html/vendor/magento/framework/Config/Dom.php on line 449
+[13-Apr-2022 02:31:32 UTC] PHP Fatal error:  Uncaught Error: Class 'DOMDocument' not found in /home/gmobilec/public_html/vendor/magento/framework/Config/Dom.php:449
+Stack trace:
+#0 /home/gmobilec/public_html/vendor/magento/framework/Config/Dom.php(116): Magento\Framework\Config\Dom->_initDom('<?xml version="...')
+#1 /home/gmobilec/public_html/vendor/magento/framework/ObjectManager/Config/Reader/Dom.php(70): Magento\Framework\Config\Dom->__construct('<?xml version="...', Object(Magento\Framework\App\Arguments\ValidationState), Array, 'xsi:type', NULL)
+#2 /home/gmobilec/public_html/vendor/magento/framework/Config/Reader/Filesystem.php(151): Magento\Framework\ObjectManager\Config\Reader\Dom->_createConfigMerger('Magento\\Framewo...', '<?xml version="...')
+#3 /home/gmobilec/public_html/vendor/magento/framework/Config/Reader/Filesystem.php(132): Magento\Framework\Config\Reader\Filesystem->_readFiles(Object(Magento\Framework\Config\FileIterator))
+#4 /home/gmobilec/public_html/vendor/magento/framework/App/ObjectManagerFactory.php(279): Magento\Framework\Config in /home/gmobilec/public_html/vendor/magento/framework/Config/Dom.php on line 449
+[13-Apr-2022 02:46:04 UTC] PHP Fatal error:  Uncaught Error: Class 'DOMDocument' not found in /home/gmobilec/public_html/vendor/magento/framework/Config/Dom.php:449
+Stack trace:
+#0 /home/gmobilec/public_html/vendor/magento/framework/Config/Dom.php(116): Magento\Framework\Config\Dom->_initDom('<?xml version="...')
+#1 /home/gmobilec/public_html/vendor/magento/framework/ObjectManager/Config/Reader/Dom.php(70): Magento\Framework\Config\Dom->__construct('<?xml version="...', Object(Magento\Framework\App\Arguments\ValidationState), Array, 'xsi:type', NULL)
+#2 /home/gmobilec/public_html/vendor/magento/framework/Config/Reader/Filesystem.php(151): Magento\Framework\ObjectManager\Config\Reader\Dom->_createConfigMerger('Magento\\Framewo...', '<?xml version="...')
+#3 /home/gmobilec/public_html/vendor/magento/framework/Config/Reader/Filesystem.php(132): Magento\Framework\Config\Reader\Filesystem->_readFiles(Object(Magento\Framework\Config\FileIterator))
+#4 /home/gmobilec/public_html/vendor/magento/framework/App/ObjectManagerFactory.php(279): Magento\Framework\Config in /home/gmobilec/public_html/vendor/magento/framework/Config/Dom.php on line 449
+[13-Apr-2022 03:40:26 UTC] PHP Fatal error:  Uncaught Error: Class 'DOMDocument' not found in /home/gmobilec/public_html/vendor/magento/framework/Config/Dom.php:449
+Stack trace:
+#0 /home/gmobilec/public_html/vendor/magento/framework/Config/Dom.php(116): Magento\Framework\Config\Dom->_initDom('<?xml version="...')
+#1 /home/gmobilec/public_html/vendor/magento/framework/ObjectManager/Config/Reader/Dom.php(70): Magento\Framework\Config\Dom->__construct('<?xml version="...', Object(Magento\Framework\App\Arguments\ValidationState), Array, 'xsi:type', NULL)
+#2 /home/gmobilec/public_html/vendor/magento/framework/Config/Reader/Filesystem.php(151): Magento\Framework\ObjectManager\Config\Reader\Dom->_createConfigMerger('Magento\\Framewo...', '<?xml version="...')
+#3 /home/gmobilec/public_html/vendor/magento/framework/Config/Reader/Filesystem.php(132): Magento\Framework\Config\Reader\Filesystem->_readFiles(Object(Magento\Framework\Config\FileIterator))
+#4 /home/gmobilec/public_html/vendor/magento/framework/App/ObjectManagerFactory.php(279): Magento\Framework\Config in /home/gmobilec/public_html/vendor/magento/framework/Config/Dom.php on line 449
+[13-Apr-2022 03:57:37 UTC] PHP Fatal error:  Uncaught Error: Class 'DOMDocument' not found in /home/gmobilec/public_html/vendor/magento/framework/Config/Dom.php:449
+Stack trace:
+#0 /home/gmobilec/public_html/vendor/magento/framework/Config/Dom.php(116): Magento\Framework\Config\Dom->_initDom('<?xml version="...')
+#1 /home/gmobilec/public_html/vendor/magento/framework/ObjectManager/Config/Reader/Dom.php(70): Magento\Framework\Config\Dom->__construct('<?xml version="...', Object(Magento\Framework\App\Arguments\ValidationState), Array, 'xsi:type', NULL)
+#2 /home/gmobilec/public_html/vendor/magento/framework/Config/Reader/Filesystem.php(151): Magento\Framework\ObjectManager\Config\Reader\Dom->_createConfigMerger('Magento\\Framewo...', '<?xml version="...')
+#3 /home/gmobilec/public_html/vendor/magento/framework/Config/Reader/Filesystem.php(132): Magento\Framework\Config\Reader\Filesystem->_readFiles(Object(Magento\Framework\Config\FileIterator))
+#4 /home/gmobilec/public_html/vendor/magento/framework/App/ObjectManagerFactory.php(279): Magento\Framework\Config in /home/gmobilec/public_html/vendor/magento/framework/Config/Dom.php on line 449
+[13-Apr-2022 04:52:28 UTC] PHP Fatal error:  Uncaught Error: Class 'DOMDocument' not found in /home/gmobilec/public_html/vendor/magento/framework/Config/Dom.php:449
+Stack trace:
+#0 /home/gmobilec/public_html/vendor/magento/framework/Config/Dom.php(116): Magento\Framework\Config\Dom->_initDom('<?xml version="...')
+#1 /home/gmobilec/public_html/vendor/magento/framework/ObjectManager/Config/Reader/Dom.php(70): Magento\Framework\Config\Dom->__construct('<?xml version="...', Object(Magento\Framework\App\Arguments\ValidationState), Array, 'xsi:type', NULL)
+#2 /home/gmobilec/public_html/vendor/magento/framework/Config/Reader/Filesystem.php(151): Magento\Framework\ObjectManager\Config\Reader\Dom->_createConfigMerger('Magento\\Framewo...', '<?xml version="...')
+#3 /home/gmobilec/public_html/vendor/magento/framework/Config/Reader/Filesystem.php(132): Magento\Framework\Config\Reader\Filesystem->_readFiles(Object(Magento\Framework\Config\FileIterator))
+#4 /home/gmobilec/public_html/vendor/magento/framework/App/ObjectManagerFactory.php(279): Magento\Framework\Config in /home/gmobilec/public_html/vendor/magento/framework/Config/Dom.php on line 449
+[13-Apr-2022 09:59:24 UTC] PHP Fatal error:  Uncaught Error: Class 'DOMDocument' not found in /home/gmobilec/public_html/vendor/magento/framework/Config/Dom.php:449
+Stack trace:
+#0 /home/gmobilec/public_html/vendor/magento/framework/Config/Dom.php(116): Magento\Framework\Config\Dom->_initDom('<?xml version="...')
+#1 /home/gmobilec/public_html/vendor/magento/framework/ObjectManager/Config/Reader/Dom.php(70): Magento\Framework\Config\Dom->__construct('<?xml version="...', Object(Magento\Framework\App\Arguments\ValidationState), Array, 'xsi:type', NULL)
+#2 /home/gmobilec/public_html/vendor/magento/framework/Config/Reader/Filesystem.php(151): Magento\Framework\ObjectManager\Config\Reader\Dom->_createConfigMerger('Magento\\Framewo...', '<?xml version="...')
+#3 /home/gmobilec/public_html/vendor/magento/framework/Config/Reader/Filesystem.php(132): Magento\Framework\Config\Reader\Filesystem->_readFiles(Object(Magento\Framework\Config\FileIterator))
+#4 /home/gmobilec/public_html/vendor/magento/framework/App/ObjectManagerFactory.php(279): Magento\Framework\Config in /home/gmobilec/public_html/vendor/magento/framework/Config/Dom.php on line 449
+[13-Apr-2022 10:07:40 UTC] PHP Fatal error:  Uncaught Error: Class 'DOMDocument' not found in /home/gmobilec/public_html/vendor/magento/framework/Config/Dom.php:449
+Stack trace:
+#0 /home/gmobilec/public_html/vendor/magento/framework/Config/Dom.php(116): Magento\Framework\Config\Dom->_initDom('<?xml version="...')
+#1 /home/gmobilec/public_html/vendor/magento/framework/ObjectManager/Config/Reader/Dom.php(70): Magento\Framework\Config\Dom->__construct('<?xml version="...', Object(Magento\Framework\App\Arguments\ValidationState), Array, 'xsi:type', NULL)
+#2 /home/gmobilec/public_html/vendor/magento/framework/Config/Reader/Filesystem.php(151): Magento\Framework\ObjectManager\Config\Reader\Dom->_createConfigMerger('Magento\\Framewo...', '<?xml version="...')
+#3 /home/gmobilec/public_html/vendor/magento/framework/Config/Reader/Filesystem.php(132): Magento\Framework\Config\Reader\Filesystem->_readFiles(Object(Magento\Framework\Config\FileIterator))
+#4 /home/gmobilec/public_html/vendor/magento/framework/App/ObjectManagerFactory.php(279): Magento\Framework\Config in /home/gmobilec/public_html/vendor/magento/framework/Config/Dom.php on line 449
+[27-Apr-2022 13:54:41 UTC] PHP Warning:  DOMDocument::loadXML(): Empty string supplied as input in /home/gmobilec/public_html/vendor/magento/framework/Config/Dom.php on line 451
+[27-Apr-2022 13:54:41 UTC] PHP Fatal error:  Uncaught Magento\Framework\Exception\LocalizedException: The XML in file "/home/gmobilec/public_html/app/etc/di.xml" is invalid:
+Unknown validation error
+Verify the XML and try again. in /home/gmobilec/public_html/vendor/magento/framework/Config/Reader/Filesystem.php:156
+Stack trace:
+#0 /home/gmobilec/public_html/vendor/magento/framework/Config/Reader/Filesystem.php(132): Magento\Framework\Config\Reader\Filesystem->_readFiles(Object(Magento\Framework\Config\FileIterator))
+#1 /home/gmobilec/public_html/vendor/magento/framework/App/ObjectManagerFactory.php(279): Magento\Framework\Config\Reader\Filesystem->read('primary')
+#2 /home/gmobilec/public_html/vendor/magento/framework/App/ObjectManagerFactory.php(140): Magento\Framework\App\ObjectManagerFactory->_loadPrimaryConfig(Object(Magento\Framework\App\Filesystem\DirectoryList), Object(Magento\Framework\Filesystem\DriverPool), Object(Magento\Framework\ObjectManager\Config\Mapper\Dom), 'production')
+#3 /home/gmobilec/public_html/vendor/magento/framework/App/Bootstr in /home/gmobilec/public_html/vendor/magento/framework/App/ObjectManagerFactory.php on line 281
+[29-Apr-2022 06:04:13 UTC] PHP Fatal error:  Uncaught RuntimeException: ObjectManager isn't initialized in /home/gmobilec/public_html/vendor/magento/framework/App/ObjectManager.php:36
+Stack trace:
+#0 /home/gmobilec/public_html/vendor/magento/framework/File/Mime.php(84): Magento\Framework\App\ObjectManager::getInstance()
+#1 /home/gmobilec/public_html/pub/get.php(61): Magento\Framework\File\Mime->__construct()
+#2 {main}
+  thrown in /home/gmobilec/public_html/vendor/magento/framework/App/ObjectManager.php on line 36
+[07-May-2022 07:21:46 UTC] PHP Notice:  Trying to access array offset on value of type null in /home/gmobilec/public_html/pub/get.php on line 40

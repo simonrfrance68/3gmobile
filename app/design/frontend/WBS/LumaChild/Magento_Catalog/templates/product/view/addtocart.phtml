@@ -1,0 +1,80 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/** @var $block \Magento\Catalog\Block\Product\View */
+?>
+<?php $_product = $block->getProduct(); ?>
+<?php $buttonTitle = __('Add to Cart'); ?>
+<?php if ($_product->isSaleable()) :?>
+<div class="box-tocart">
+    <div class="fieldset">
+        <?php if ($block->shouldRenderQuantity()) :?>
+        <div class="field qty">
+            <label class="label" for="qty"><span><?= $block->escapeHtml(__('Qty')) ?></span></label>
+            <div class="control">
+                <div class="input-group">
+                <span id="dec" class="btn btn-info-minus">-</span>
+                <input type="number"
+                   name="qty"
+                   id="qty"
+                   min="0"
+                   value="<?= $block->getProductDefaultQty() * 1 ?>"
+                   title="<?= $block->escapeHtmlAttr(__('Qty')) ?>"
+                   class="input-text qty"
+                   data-validate="<?= $block->escapeHtmlAttr(json_encode($block->getQuantityValidators())) ?>"
+                    />
+                <span id="inc" class="btn btn-info-plus">+</span>
+            </div>
+            </div>
+        </div>
+        <?php endif; ?>
+        <div class="actions">
+            <button type="submit"
+                    title="<?= $block->escapeHtmlAttr($buttonTitle) ?>"
+                    class="action primary tocart"
+                    id="product-addtocart-button" disabled>
+                <span><?= $block->escapeHtml($buttonTitle) ?></span>
+            </button>
+            <?= $block->getChildHtml('', true) ?>
+        </div>
+    </div>
+</div>
+<?php endif; ?>
+<script type="text/x-magento-init">
+    {
+        "#product_addtocart_form": {
+            "Magento_Catalog/js/validate-product": {}
+        }
+    }
+</script>
+<script>
+    require(['jquery'],
+    function ($) {
+        jQuery('#inc').on('click',function(){
+            var $qty = jQuery(this).closest('.box-tocart').find('.input-text');
+            var currentVal = parseInt($qty.val());
+            if (!isNaN(currentVal)) {
+				
+                $qty.val(currentVal + 1);
+              setTimeout(function(){ changeFunction(); }, 300);
+			
+            
+			}
+			
+        });
+        jQuery('#dec').on('click',function(){
+            var $qty = jQuery(this).closest('.box-tocart').find('.input-text');
+            var currentVal = parseInt($qty.val());
+            if (!isNaN(currentVal) && currentVal > 1) {
+                $qty.val(currentVal - 1);
+				setTimeout(function(){ changeFunction(); }, 300);
+            }
+
+        });
+
+
+    });
+</script>

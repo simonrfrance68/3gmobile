@@ -1,0 +1,65 @@
+<?php
+/**
+ * Top menu for store
+ *
+ * @var $block \Magento\Theme\Block\Html\Topmenu
+ */
+
+$columnsLimit = $block->getColumnsLimit() ?: 0;
+$_menuHtml = $block->getHtml('level-top', 'submenu', $columnsLimit);
+$currentUrl = $block->getCurrentUrl();
+try {
+    // Get the root category information
+    $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+    $storeManager = $objectManager->get(\Magento\Store\Model\StoreManagerInterface::class);
+    $categoryRepository = $objectManager->get(\Magento\Catalog\Model\CategoryRepository::class);
+
+    $store = $storeManager->getStore();
+    $rootCategoryId = $store->getRootCategoryId();
+    $rootCategory = $categoryRepository->get($rootCategoryId);
+    $rootCategoryName = $rootCategory->getName(); // Fetch the root category name
+} catch (\Exception $e) {
+    $rootCategoryName = "Default Category"; // Fallback in case of an error
+}
+?>
+
+<nav class="navigation" data-action="navigation">
+    <ul data-mage-init='{"menu":{"responsive":true, "expanded":true, "position":{"my":"left top","at":"left bottom"}}}'>
+        <li class="level0 home <?php if ($currentUrl == '/'): ?>active<?php endif; ?>">
+            <a href="<?php echo $storeManager->getStore()->getBaseUrl(); ?>" title="<?php echo __('Home') ?>" class="level-top">
+                <span><?php echo __('Home') ?></span>
+            </a>
+        </li>
+        <li class="level0 <?php if ($currentUrl == '/about-us'): ?>active<?php endif; ?>">
+            <a href="<?php echo $storeManager->getStore()->getBaseUrl() . 'about-us'; ?>" title="<?php echo __('About') ?>" class="level-top">
+                <span><?php echo __('About Us') ?></span>
+            </a>
+        </li>
+        <li class="level0 <?php if ($currentUrl == '/customer-service'): ?>active<?php endif; ?>">
+            <a href="<?php echo $storeManager->getStore()->getBaseUrl() . 'customer-service'; ?>" title="<?php echo __('Customer Service') ?>" class="level-top">
+                <span><?php echo __('Customer Service') ?></span>
+            </a>
+        </li>
+
+        <!-- Add Root Category to Top Menu -->
+        <li class="level0 root-category">
+            <a href="javascript:void(0);" class="level-top" data-toggle="root-category">
+                <span><?= $block->escapeHtml($rootCategoryName) ?></span>
+            </a>
+            <ul class="submenu">
+                <?= /* @noEscape */ $_menuHtml ?>
+            </ul>
+        </li>
+        <?= $block->getChildHtml() ?>
+        <li class="level0 <?php if ($currentUrl == '/blog'): ?>active<?php endif; ?>">
+            <a href="<?php echo $storeManager->getStore()->getBaseUrl() . 'blog'; ?>" title="<?php echo __('Our Blog') ?>" class="level-top">
+                <span><?php echo __('Our Blog') ?></span>
+            </a>
+        </li>
+        <li class="level0 <?php if ($currentUrl == '/contact'): ?>active<?php endif; ?>">
+            <a href="<?php echo $storeManager->getStore()->getBaseUrl() . 'contact'; ?>" title="<?php echo __('Contact Us') ?>" class="level-top">
+                <span><?php echo __('Contact Us') ?></span>
+            </a>
+        </li>
+    </ul>
+</nav>

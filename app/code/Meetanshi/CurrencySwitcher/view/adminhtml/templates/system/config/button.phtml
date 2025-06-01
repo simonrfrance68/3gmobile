@@ -1,0 +1,30 @@
+<script>
+    require([
+        'jquery',
+        'prototype'
+    ], function (jQuery) {
+        function UpdateDB() {
+            jQuery.ajax({
+                url: '<?php echo $block->getAjaxUrl() ?>',
+                type: 'POST',
+                data: {
+                    resource: ''
+                },
+                showLoader: true,
+                asynchronous: true,
+                success: function (response) {
+                    location.reload();
+                },
+                error: function (data) {
+                    location.reload();
+                }
+            });
+        }
+
+        jQuery('#btn_generate').click(function () {
+            UpdateDB();
+        });
+    });
+</script>
+
+<?php echo $block->getButtonHtml() ?>

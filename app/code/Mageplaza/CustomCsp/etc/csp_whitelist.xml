@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<csp_whitelist xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Csp:etc/csp_whitelist.xsd">
+        <policies>
+            
+            <policy id="script-src">
+                <values>
+                    <value id="adobedtmassets" type="host">assets.adobedtm.com</value>
+                    <value id="adobedtm-all" type="host">*.adobedtm.com</value>
+                </values>
+            </policy>
+            <policy id="img-src">
+                <values>
+                    <value id="data" type="host">'self'</value>
+                    <value id="adobedtm-assets" type="host">assets.adobedtm.com</value>
+                    <value id="adobedtm-all" type="host">*.adobedtm.com</value>
+                    <value id="cloudflare" type="host">*.cloudflare.com</value>
+                    <value id="googleadservices" type="host">*.googleadservices.com</value>
+                    <value id="google-analytics" type="host">*.google-analytics.com</value>
+                    <value id="3gmobilecctv" type="host">https://www.3gmobilecctv.com</value>
+                </values>
+            </policy>
+            <policy id="style-src">
+                <values>
+                    <value id="custom-css" type="host">http://www.3gmobilecctv.com</value>
+                </values>
+            </policy>
+        </policies>
+</csp_whitelist>

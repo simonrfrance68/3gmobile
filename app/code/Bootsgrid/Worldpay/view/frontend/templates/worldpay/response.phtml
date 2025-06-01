@@ -1,0 +1,189 @@
+<?php
+/**
+ * 
+ * @category   Magento
+ * @package    Bootsgrid_Worldpay
+ * @copyright  Copyright (c) 2017-2018 Bootsgrid (https://www.bootsgrid.com)
+ */
+
+$obj = \Magento\Framework\App\ObjectManager::getInstance();
+
+// get request variables
+$MC_orderid = $_POST['cartId'];
+
+$authCurrency = $_POST['authCurrency'];
+
+$authAmount = $_POST['authAmount'];
+
+$transId = $_POST['transId'];
+
+$AVS = $_POST['AVS'];
+
+$cardType = $_POST['cardType'];
+
+//$wafMerchMessage = $_POST['wafMerchMessage'];
+$authMode = $_POST['authMode'];
+
+$transStatus = $_POST['transStatus'];
+
+//echo '<ul>'.'<li>'.$MC_orderid.'</li>'.'<li>'.$authCurrency.'</li>'.'<li>'.$authAmount.'</li>'.'<li>'.$transId.'</li>'.'<li>'.$authMode.'</li>'.'<li>'.$transStatus.'</li>'.'</ul>';
+
+// check order id
+if (empty($MC_orderid) || strlen($MC_orderid) > 50) {
+
+    throw new \Magento\Framework\Exception\LocalizedException(
+        __('Missing or invalid order ID.')
+    );
+
+}
+
+$storeManager = $obj->get('\Magento\Store\Model\StoreManagerInterface');
+
+$baseurl = $storeManager->getStore()->getBaseUrl();
+
+/** @var \Magento\Sales\Model\Order\Status $status */
+$status = $obj->create('Magento\Sales\Model\Order\Status');
+
+// load order for further validation
+$order = $obj->get('Magento\Sales\Model\Order')->loadByIncrementId($MC_orderid);
+
+if (!$order->getId()) {
+
+    throw new \Magento\Framework\Exception\LocalizedException(
+        __('Order not found.')
+    );
+
+}
+
+//DB Transaction
+$db_transaction = $obj->get('Magento\Framework\DB\Transaction');
+
+$paymentInst = $order->getPayment()->getMethodInstance();
+
+if ($transStatus == 'Y') {
+
+	$price = number_format($order->getBaseGrandTotal(),2,'.','');
+
+	$currency = $order->getOrderCurrencyCode();
+
+	// check transaction amount
+	if ($price != $authAmount) {
+
+		throw new \Magento\Framework\Exception\LocalizedException(
+	        __('Transaction currency doesn\'t match.')
+	    );
+
+	}
+
+	// check transaction currency
+	if ($currency != $authCurrency) {
+
+		throw new \Magento\Framework\Exception\LocalizedException(
+	        __('Transaction currency doesn\'t match.')
+	    );
+
+	}
+
+	// save transaction information
+	$order->getPayment()
+		->setTransactionId($transId)
+		->setLastTransId($transId)
+		->setCcAvsStatus($AVS)
+		->setCcType($cardType);
+
+	// save fraud information
+	if (!empty($wafMerchMessage)) {
+
+	    $additional_data = $order->getPayment()->getAdditionalData();
+
+	    $additional_data .= ($additional_data ? "<br/>\n" : '') . $wafMerchMessage;
+
+	    $order->getPayment()->setAdditionalData($additional_data);
+
+	}
+
+	switch($authMode) {
+
+	    case 'A':
+
+	        if ($order->canInvoice()) {
+
+	            $invoice = $order->prepareInvoice();
+
+	            $invoice->register()->capture();
+
+	            $db_transaction->addObject($invoice)
+	                ->addObject($invoice->getOrder())
+	                ->save();
+
+	        }
+
+	        $order->addStatusToHistory(\Magento\Sales\Model\Order::STATE_COMPLETE, 'authorize: Customer returned successfully', true);
+
+	        break;
+
+	    case 'E':
+
+	        $order->setState(\Magento\Sales\Model\Order::STATE_PROCESSING, 'preauthorize: Customer returned successfully', true);
+
+	        break;
+
+	}
+
+	//$order->sendNewOrderEmail();
+	$order->setEmailSent(true);
+
+	$order->save(); ?>
+
+	<!-- <div class="page-head">
+
+		<h2>Your payment has been successfully Completed by our shop system...</h2>
+
+		<a class='continue' href="<?php //echo $block->getBaseUrl(); ?>">Click Continue To Shoping</a>
+
+	</div> -->
+	<meta http-equiv="refresh" content="0;url=https://bootsgrid.com/product/magento2/bworldpay/index/success" />
+	
+
+<?php } elseif ($transStatus == 'C') {
+
+	// cancel order
+    if ($order->canCancel()) {
+
+        $order->cancel();
+
+        $order->addStatusToHistory(\Magento\Sales\Model\Order::STATE_CANCELED, 'canceled', 'Payment was canceled', true);
+
+        $order->save();
+
+    } ?>
+
+    <!-- <div class="page-head">
+
+		<h2>Your payment has been Cancelled by our shop system for some reasons...</h2>
+
+		<a class='continue' href="<?php //echo $block->getBaseUrl(); ?>">Click Continue To Shoping</a>
+
+	</div> -->
+	<meta http-equiv="refresh" content="0;url=https://bootsgrid.com/product/magento2/bworldpay/index/success" />
+	
+
+<?php } else {
+
+	/*throw new \Magento\Framework\Exception\LocalizedException(
+        __('Transaction was not successful.')
+    );*/ ?>
+
+    <!-- <div class="page-head">
+
+		<h2>Order has not Found...</h2>
+
+		<a class='continue' href="<?php echo $block->getBaseUrl(); ?>">Click Continue To Shoping</a>
+
+	</div> -->
+	<meta http-equiv="refresh" content="0;url=https://bootsgrid.com/product/magento2/bworldpay/index/success" />
+	
+
+<?php }          
+
+?>

@@ -1,0 +1,69 @@
+<?php
+/**
+ * 
+ * @category   Magento
+ * @package    Bootsgrid_Worldpay
+ * @copyright  Copyright (c) 2017-2018 Bootsgrid (https://www.bootsgrid.com)
+ */
+$_objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+
+$resource = $_objectManager->get('Magento\Framework\App\ResourceConnection');
+
+$connection = $resource->getConnection();
+
+$getTableName = $connection->getTableName('sales_order_grid');
+
+$query_grid = "SELECT * FROM `$getTableName`";
+
+$result_grid = $connection->fetchAll($query_grid);
+
+$end_grid = end($result_grid); 
+
+if($end_grid['payment_method'] == 'worldpay_cc' && $end_grid['status'] == 'complete') { ?>
+
+<html>
+	<head>
+		<title>Worldpay Payment Success</title>
+	</head>
+	<body>
+		<div class="page-head">
+		    <h2>Your payment has been successfully Completed by our shop system...</h2>
+		</div>
+		<a class='continue' href="<?php echo $block->getBaseUrl(); ?>">Click Continue To Shoping</a>
+	</body>
+</html>
+
+<?php } elseif($end_grid['payment_method'] == 'worldpay_cc' && $end_grid['status'] == 'canceled') { ?>
+<html>
+	<head>
+		<title>Worldpay Payment Cancel</title>
+	</head>
+	<body>
+		<div class="page-head">
+		    <h2>Your payment has been Cancelled by our shop system for some reasons...</h2>
+		</div>
+		<a class='continue' href="<?php echo $block->getBaseUrl(); ?>">Click Continue To Shoping</a>
+	</body>
+</html>
+<?php } else { ?>
+<html>
+	<head>
+		<title>Worldpay Payment</title>
+	</head>
+	<body>
+		<div class="page-head">
+		    <h2>Order has not Found...</h2>
+		</div>
+		<a class='continue' href="<?php echo $block->getBaseUrl(); ?>">Click Continue To Shoping</a>
+	</body>
+</html>
+<?php } ?>
+<style type="text/css">
+	.continue {
+		padding: 10px 15px;
+		background-color: #3c8dbc;
+		border-color: #367fa9;
+		text-decoration: none;
+		color: #fff !important;
+	}
+</style>

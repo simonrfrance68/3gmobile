@@ -1,0 +1,92 @@
+<?php
+/**
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
+ * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
+ *
+ * Glory to Ukraine! Glory to the heroes!
+ */
+?>
+<?php
+/**
+ * Blog recent posts widget
+ *
+ * @var $block \Magefan\Blog\Block\Widget\Recent
+ */
+?>
+
+<?php
+$width = (int)$block->getBackgroundImageWidth() ?: 700;
+$imageHelper = $this->helper(\Magefan\Blog\Helper\Image::class);
+$descLength = $block->getDescLength();
+?>
+
+<?php
+    $_postCollection = $block->getPostCollection();
+?>
+<?php if ($_postCollection->count()) { ?>
+<div class="post-list-wrapper blog-widget-recent">
+    <h3 class="title"><?= $block->escapeHtml($block->getTitle()) ?></h3>
+    <ul class="post-list clearfix blog-slider">
+        <?php foreach ($_postCollection as $_post) { ?>
+            <?php
+                $_postUrl = $block->escapeUrl($_post->getPostUrl());
+                $_postName = $block->escapeHtml($_post->getTitle());
+                $desc = $_post->getMetaDescription();
+        		if(strlen($desc)> $descLength ) { 
+        			$strCutDesc = substr($desc, 0, $descLength);
+        			$desc = substr($strCutDesc, 0, strrpos($strCutDesc, ' ')).'&hellip;';
+        		}
+        		$desc = $this->stripTags($desc,null,true);
+            ?>
+            <li class="post-holder post-holder-<?= (int)$_post->getId() ?>">
+                <div class="post-content">
+                    <a href="<?= /*@noEscape*/ $_postUrl ?>" title="<?= /*@noEscape*/ $_postName ?>">
+                        <img src="<?= $block->escapeHtml($imageHelper->init($_post->getFeaturedListImg())->resize($width, null, false)) ?>" 
+                             alt="<?= $block->escapeHtml($_postName) ?>" />
+                    </a>
+                    <div class="blog-date"><span><?php echo $block->getPostedOn($item,'F d, Y'); ?></span></div>
+                    <div class="post-title">
+                        <a href="<?= /*@noEscape*/ $_postUrl ?>"><?= /*@noEscape*/ $_postName ?></a>
+                    </div>
+                    <div class="blog-desc"><?php echo $desc ?></div>
+                </div>
+            </li>
+        <?php } ?>
+    </ul>
+</div>
+<script>
+    require(['jquery', 'slick'], function($) {
+        $(document).ready(function() {
+            $('.blog-slider').slick({
+                slidesToShow: 3,      // Number of slides visible at once
+                slidesToScroll: 1,
+                autoplay: true,       // Enable auto-slide
+                autoplaySpeed: 3000,  // Delay between slides
+                dots: true,           // Show navigation dots
+                arrows: true,         // Show next/prev arrows
+                responsive: [
+                    {
+                        breakpoint: 768,
+                        settings: {
+                            slidesToShow: 1
+                        }
+                    }
+                ]
+            });
+        });
+    });
+</script>
+<style>
+.blog-slider .post-holder {
+    text-align: center;
+    padding: 10px;
+}
+
+.blog-slider img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+</style>
+<?php } ?>

@@ -1,0 +1,16 @@
+<?php
+
+$_order = $block->getOrder();
+
+$payment = $_order->getPayment();
+
+$paymentMethod = $_order->getPayment()->getMethodInstance()->getCode();
+
+if($paymentMethod == 'worldpay_cc') {
+?>
+	<div style="margin-top: 10px;">
+		<p><b>TransactionId:</b> <?php echo $payment->getLastTransId(); ?></p>
+		<p><b>Avs Status:</b> <?php echo $payment->getCcAvsStatus(); ?></p>
+		<p><b>Credit Card Type:</b> <?php echo $payment->getCcType(); ?></p>
+	</div>
+<?php } ?>
