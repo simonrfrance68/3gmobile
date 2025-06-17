@@ -1,0 +1,152 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © MageWorx. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <!-- Models type pool -->
+    <type name="MageWorx\OpenAI\Model\Models\ModelsFactory">
+        <arguments>
+            <argument name="types" xsi:type="array">
+                <!-- Gemini 1.5 -->
+                <item name="gemini-1.5-pro" xsi:type="string">MageWorx\GoogleAI\Model\Models\Gemini\Gemini15ProModel</item>
+                <item name="gemini-1.5-pro-002" xsi:type="string">MageWorx\GoogleAI\Model\Models\Gemini\Gemini15Pro002Model</item>
+                <item name="gemini-1.5-flash" xsi:type="string">MageWorx\GoogleAI\Model\Models\Gemini\Gemini15FlashModel</item>
+                <item name="gemini-1.5-flash-001" xsi:type="string">MageWorx\GoogleAI\Model\Models\Gemini\Gemini15Flash001Model</item>
+
+                <!-- Gemini 2.0 -->
+                <item name="gemini-2.0-flash" xsi:type="string">MageWorx\GoogleAI\Model\Models\Gemini\Gemini20FlashModel</item>
+                <item name="gemini-2.0-flash-001" xsi:type="string">MageWorx\GoogleAI\Model\Models\Gemini\Gemini20Flash001Model</item>
+                <item name="gemini-2.0-flash-lite-001" xsi:type="string">MageWorx\GoogleAI\Model\Models\Gemini\Gemini20FlashLite001Model</item>
+
+                <!-- Gemini 2.5 -->
+                <item name="gemini-2.5-pro-preview-03-25" xsi:type="string">MageWorx\GoogleAI\Model\Models\Gemini\Gemini25ProPreview0325Model</item>
+                <item name="gemini-2.5-pro-exp-03-25" xsi:type="string">MageWorx\GoogleAI\Model\Models\Gemini\Gemini25ProExp0325Model</item>
+                <item name="gemini-2.5-flash-preview-04-17" xsi:type="string">MageWorx\GoogleAI\Model\Models\Gemini\GeminiFlash25Preview0417Model</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <!-- Virtual types for Gemini models using GenericGeminiModel -->
+    <!-- Gemini 1.5 -->
+    <virtualType name="MageWorx\GoogleAI\Model\Models\Gemini\Gemini15ProModel" type="MageWorx\GoogleAI\Model\Models\Gemini\GenericGeminiModel">
+        <arguments>
+            <argument name="messenger" xsi:type="object">MageWorx\GoogleAI\Model\MessengerGemini</argument>
+            <argument name="type" xsi:type="string">gemini-1.5-pro</argument>
+            <argument name="maxContextLength" xsi:type="number">2000000</argument>
+            <argument name="path" xsi:type="string">models/gemini-1.5-pro:generateContent</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="MageWorx\GoogleAI\Model\Models\Gemini\Gemini15Pro002Model" type="MageWorx\GoogleAI\Model\Models\Gemini\GenericGeminiModel">
+        <arguments>
+            <argument name="messenger" xsi:type="object">MageWorx\GoogleAI\Model\MessengerGemini</argument>
+            <argument name="type" xsi:type="string">gemini-1.5-pro-002</argument>
+            <argument name="maxContextLength" xsi:type="number">2000000</argument>
+            <argument name="path" xsi:type="string">models/gemini-1.5-pro-002:generateContent</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="MageWorx\GoogleAI\Model\Models\Gemini\Gemini15FlashModel" type="MageWorx\GoogleAI\Model\Models\Gemini\GenericGeminiModel">
+        <arguments>
+            <argument name="messenger" xsi:type="object">MageWorx\GoogleAI\Model\MessengerGemini</argument>
+            <argument name="type" xsi:type="string">gemini-1.5-flash</argument>
+            <argument name="maxContextLength" xsi:type="number">1000000</argument>
+            <argument name="path" xsi:type="string">models/gemini-1.5-flash:generateContent</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="MageWorx\GoogleAI\Model\Models\Gemini\Gemini15Flash001Model" type="MageWorx\GoogleAI\Model\Models\Gemini\GenericGeminiModel">
+        <arguments>
+            <argument name="messenger" xsi:type="object">MageWorx\GoogleAI\Model\MessengerGemini</argument>
+            <argument name="type" xsi:type="string">gemini-1.5-flash-001</argument>
+            <argument name="maxContextLength" xsi:type="number">1000000</argument>
+            <argument name="path" xsi:type="string">models/gemini-1.5-flash-001:generateContent</argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Gemini 2.0 -->
+    <virtualType name="MageWorx\GoogleAI\Model\Models\Gemini\Gemini20FlashModel" type="MageWorx\GoogleAI\Model\Models\Gemini\GenericGeminiModel">
+        <arguments>
+            <argument name="messenger" xsi:type="object">MageWorx\GoogleAI\Model\MessengerGemini</argument>
+            <argument name="type" xsi:type="string">gemini-2.0-flash</argument>
+            <argument name="maxContextLength" xsi:type="number">1048576</argument>
+            <argument name="path" xsi:type="string">models/gemini-2.0-flash:generateContent</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="MageWorx\GoogleAI\Model\Models\Gemini\Gemini20Flash001Model" type="MageWorx\GoogleAI\Model\Models\Gemini\GenericGeminiModel">
+        <arguments>
+            <argument name="messenger" xsi:type="object">MageWorx\GoogleAI\Model\MessengerGemini</argument>
+            <argument name="type" xsi:type="string">gemini-2.0-flash-001</argument>
+            <argument name="maxContextLength" xsi:type="number">1048576</argument>
+            <argument name="path" xsi:type="string">models/gemini-2.0-flash-001:generateContent</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="MageWorx\GoogleAI\Model\Models\Gemini\Gemini20FlashLite001Model" type="MageWorx\GoogleAI\Model\Models\Gemini\GenericGeminiModel">
+        <arguments>
+            <argument name="messenger" xsi:type="object">MageWorx\GoogleAI\Model\MessengerGemini</argument>
+            <argument name="type" xsi:type="string">gemini-2.0-flash-lite-001</argument>
+            <argument name="maxContextLength" xsi:type="number">1048576</argument>
+            <argument name="path" xsi:type="string">models/gemini-2.0-flash-lite-001:generateContent</argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Gemini 2.5 -->
+    <virtualType name="MageWorx\GoogleAI\Model\Models\Gemini\Gemini25ProPreview0325Model" type="MageWorx\GoogleAI\Model\Models\Gemini\GenericGeminiModel">
+        <arguments>
+            <argument name="messenger" xsi:type="object">MageWorx\GoogleAI\Model\MessengerGemini</argument>
+            <argument name="type" xsi:type="string">gemini-2.5-pro-preview-03-25</argument>
+            <argument name="maxContextLength" xsi:type="number">1048576</argument>
+            <argument name="path" xsi:type="string">models/gemini-2.5-pro-preview-03-25:generateContent</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="MageWorx\GoogleAI\Model\Models\Gemini\Gemini25ProExp0325Model" type="MageWorx\GoogleAI\Model\Models\Gemini\GenericGeminiModel">
+        <arguments>
+            <argument name="messenger" xsi:type="object">MageWorx\GoogleAI\Model\MessengerGemini</argument>
+            <argument name="type" xsi:type="string">gemini-2.5-pro-exp-03-25</argument>
+            <argument name="maxContextLength" xsi:type="number">1048576</argument>
+            <argument name="path" xsi:type="string">models/gemini-2.5-pro-exp-03-25:generateContent</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="MageWorx\GoogleAI\Model\Models\Gemini\GeminiFlash25Preview0417Model" type="MageWorx\GoogleAI\Model\Models\Gemini\GenericGeminiModel">
+        <arguments>
+            <argument name="messenger" xsi:type="object">MageWorx\GoogleAI\Model\MessengerGemini</argument>
+            <argument name="type" xsi:type="string">gemini-2.5-flash-preview-04-17</argument>
+            <argument name="maxContextLength" xsi:type="number">1048576</argument>
+            <argument name="path" xsi:type="string">models/gemini-2.5-flash-preview-04-17:generateContent</argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Inject messenger into each model -->
+    <type name="Magento\Config\Model\Config\TypePool">
+        <arguments>
+            <argument name="sensitive" xsi:type="array">
+                <item name="mageworx_openai/main_settings/google_api_key" xsi:type="string">1</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <!-- Plugin to add new model to the source list of \MageWorx\OpenAI\Model\Source\OpenAIModels -->
+    <type name="MageWorx\OpenAI\Model\Source\OpenAIModels">
+        <plugin name="add_new_model_to_source" type="MageWorx\GoogleAI\Plugin\OpenAIModelsSourcePlugin" sortOrder="10"/>
+    </type>
+
+    <!-- Config options -->
+    <type name="MageWorx\SeoAI\Model\Source\SeoOpenAIModels">
+        <arguments>
+            <argument name="allowedModelsForSeo" xsi:type="array">
+                <item name="gemini-1.5-pro" xsi:type="string">gemini-1.5-pro</item>
+                <item name="gemini-1.5-pro-002" xsi:type="string">gemini-1.5-pro-002</item>
+                <item name="gemini-1.5-flash" xsi:type="string">gemini-1.5-flash</item>
+                <item name="gemini-1.5-flash-001" xsi:type="string">gemini-1.5-flash-001</item>
+                <item name="gemini-2.0-flash" xsi:type="string">gemini-2.0-flash</item>
+                <item name="gemini-2.0-flash-001" xsi:type="string">gemini-2.0-flash-001</item>
+                <item name="gemini-2.0-flash-lite-001" xsi:type="string">gemini-2.0-flash-lite-001</item>
+                <item name="gemini-2.5-pro-preview-03-25" xsi:type="string">gemini-2.5-pro-preview-03-25</item>
+                <item name="gemini-2.5-pro-exp-03-25" xsi:type="string">gemini-2.5-pro-exp-03-25</item>
+                <item name="gemini-2.5-flash-preview-04-17" xsi:type="string">gemini-2.5-flash-preview-04-17</item>
+            </argument>
+        </arguments>
+    </type>
+</config>
