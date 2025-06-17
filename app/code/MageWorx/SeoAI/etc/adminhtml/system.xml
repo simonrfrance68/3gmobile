@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © MageWorx. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="mageworx">
+            <label>MageWorx</label>
+        </tab>
+        <section id="mageworx_seo">
+            <tab>mageworx</tab>
+            <group id="mageworx_seoai" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>SEO AI</label>
+                <comment><![CDATA[
+To activate and use the SEO AI module features, please get your <a href="https://platform.openai.com/account/api-keys" target="_blank">OpenAI API key</a>
+or <a href="https://console.cloud.google.com/apis/credentials" target="_blank">Google API key</a>.
+Once you have your API key, please specify it in the <a href="{{config path='web/secure/base_url'}}admin/system_config/edit/section/mageworx_openai">'AI Integration Settings'</a> section.
+]]></comment>
+                <field id="is_enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment><![CDATA[Enable the AI features for the administrator.
+                    When disabled you will no longer see the “Generate using AI” buttons in product and category form.
+                    All previously generated data will still be available.]]>
+                    </comment>
+                </field>
+                <field id="enabled_on" translate="label comment" type="multiselect" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0" canRestore="1">
+                    <label>Enable for</label>
+                    <source_model>MageWorx\SeoAI\Model\Source\EnabledForEntities</source_model>
+                    <can_be_empty>1</can_be_empty>
+                    <depends>
+                        <field id="is_enabled">1</field>
+                    </depends>
+                    <comment>
+                        Using this field you can enable or disable the "Generate" functionality for specific entities.
+                    </comment>
+                </field>
+                <field id="openai_model" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0" canRestore="1">
+                    <label>AI Model</label>
+                    <source_model>MageWorx\SeoAI\Model\Source\SeoOpenAIModels</source_model>
+                    <comment><![CDATA[
+<b>GPT-4</b> – The most capable general-purpose model. Best for tasks requiring high accuracy, logic, and understanding.<br>
+
+<b>GPT-4 Turbo</b> – Faster and cheaper than GPT-4 with comparable quality. Supports up to <b>128k tokens</b> context length.<br>
+
+<b>GPT-4o</b> – The latest flagship OpenAI model with improved speed, reasoning, and multi-modal support. Ideal for content generation.<br>
+
+<b>GPT-4.1 / 4.1-nano / 4.1-mini</b> – Experimental successors of GPT-4o with varying performance profiles. Choose based on your speed and cost needs.<br>
+
+<b>GPT-3.5 Turbo</b> – A highly efficient model offering great quality at a lower cost. Perfect for most SEO content generation tasks.<br>
+
+<b>GPT-3.5 Turbo 0125 / 1106 / Instruct</b> – Iterations of GPT-3.5 with improved instruction-following and longer context support (up to 16k tokens).<br>
+
+<b>Text Davinci 003</b> – A powerful GPT-3 series model, excels at following instructions and generating high-quality text.<br>
+
+<b>Text Ada 001</b> – Lightweight and low-cost. Best for basic text tasks and quick generation needs.<br>
+
+<i>Note:</i> Model availability may depend on your OpenAI plan and quota.
+
+<hr>
+
+<b>Gemini 1.5 Pro</b> – Multimodal model optimized for advanced reasoning, long context (up to <b>2M tokens</b>), and instruction following.<br>
+
+<b>Gemini 1.5 Flash</b> – Fast and efficient sibling of 1.5 Pro. Great for scalable content generation with <b>1M token</b> context.<br>
+
+<b>Gemini 2.0 Flash</b> – Improved throughput and context length. Suitable for large documents and SEO content.<br>
+
+<b>Gemini 2.0 Flash Lite</b> – Lighter version of Flash 2.0 for faster response and cost efficiency.<br>
+
+<b>Gemini 2.5 Pro Preview / Experimental</b> – Cutting-edge Gemini versions with up to <b>1M tokens</b> and extended output (up to 65k tokens). Use cautiously.<br>
+
+<b>Gemini 2.5 Flash Preview / Experimental</b> – Ideal for fast generation tasks with modern capabilities and enhanced limits.<br>
+
+<b>Gemini Flash / Flash Lite 001</b> – Stable releases of Gemini 2.0 generation models from 2025.<br>
+
+<b>Gemini 1.5 Pro 002 / Flash 001</b> – Improved versions of 1.5 generation, delivering better latency and instruction tuning.<br>
+
+<i>Note:</i> Gemini models require a valid <b>Google API Key</b> in your <b>Google Cloud Console</b>. Availability and performance depend on region and quota.
+]]></comment>
+                </field>
+                <include path="MageWorx_SeoAI::system/product_config.xml"/>
+                <include path="MageWorx_SeoAI::system/category_config.xml"/>
+            </group>
+        </section>
+    </system>
+</config>
