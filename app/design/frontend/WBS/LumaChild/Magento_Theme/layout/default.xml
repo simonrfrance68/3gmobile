@@ -3,6 +3,14 @@
         <!-- Remove Footer Links Block -->
         <referenceBlock name="footer_links" remove="true" />
         <referenceBlock name="form.subscribe" remove="true" />
+        <referenceBlock name="catalog.compare.link" remove="true" />
+        <referenceBlock name="catalog.compare.sidebar" remove="true"/>
+        <referenceBlock name="catalogsearch.product.addto.compare" remove="true"/>
+        <referenceBlock name="category.product.addto.compare" remove="true"/>
+        <referenceBlock name="crosssell.product.addto.compare" remove="true" />
+        <referenceBlock name="related.product.addto.compare" remove="true" />
+        <referenceBlock name="upsell.product.addto.compare" remove="true" />
+        <referenceBlock name="view.addto.compare" remove="true" />
          <!-- Move Navigation Menu After Logo -->
         <!-- Move Navigation for Desktop
         <move element="catalog.topnav" destination="header-wrapper" after="logo" as="desktop_topnav" />-->
@@ -12,6 +20,6 @@
             <block class="Magento\Theme\Block\Html\Topmenu" name="mobile.topnav" as="mobile_topnav" template="Magento_Theme::html/topmenu.phtml"  after="logo" />
              <block class="Magento\Wishlist\Block\Link" name="wishlist_link" template="Magento_Wishlist::link.phtml" after="search" />
         </referenceContainer>
-    
+
     </body>
 </page>
