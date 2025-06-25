@@ -1,0 +1,168 @@
+<?php
+/**
+ * Copyright ©  MageWorx. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+
+namespace MageWorx\Info\Block\Adminhtml;
+
+use Magento\Framework\Component\ComponentRegistrarInterface;
+use Magento\Framework\DataObjectFactory;
+use Magento\Framework\Filesystem\Directory\ReadFactory;
+use Magento\Framework\View\Element\Template;
+use MageWorx\Info\Helper\Data;
+use MageWorx\Info\Model\MetaPackageList;
+
+class Extensions extends Template
+{
+    /**
+     * @var Data
+     */
+    protected $helper;
+
+    /**
+     * @var MetaPackageList
+     */
+    protected $metaPackageList;
+
+    /**
+     * @var DataObjectFactory
+     */
+    protected $dataObjectFactory;
+
+    /**
+     * @var string
+     */
+    protected $_template = 'MageWorx_Info::extensions.phtml';
+
+    /**
+     * Extensions constructor.
+     *
+     * @param MetaPackageList $metaPackageList
+     * @param ComponentRegistrarInterface $componentRegistrar
+     * @param ReadFactory $readFactory
+     * @param Data $helper
+     * @param Template\Context $context
+     * @param array $data
+     */
+    public function __construct(
+        MetaPackageList   $metaPackageList,
+        Data              $helper,
+        DataObjectFactory $dataObjectFactory,
+        Template\Context  $context,
+        array             $data = []
+    ) {
+        parent::__construct($context, $data);
+        $this->metaPackageList   = $metaPackageList;
+        $this->helper            = $helper;
+        $this->dataObjectFactory = $dataObjectFactory;
+    }
+
+    /**
+     * @return array
+     */
+    public function getRecommendedExtensionsData()
+    {
+        $data = $this->helper->getRecommendedExtensionsData();
+
+        $result = [];
+
+        if (is_array($data)) {
+            foreach ($data as $id => $extData) {
+                $result[$id] = $this->dataObjectFactory->create()->setData($extData);
+            }
+        }
+
+        return $result;
+    }
+
+    /**
+     * @return array
+     */
+    public function getInstalledExtensionsData()
+    {
+        $data   = $this->helper->getInstalledExtensionsData();
+        $result = [];
+
+        if (is_array($data)) {
+            foreach ($data as $id => $extData) {
+                $result[$id] = $this->dataObjectFactory->create()->setData($extData);
+            }
+        }
+
+        return $result;
+    }
+
+    /**
+     * @return string
+     */
+    public function getReviewUrl()
+    {
+        return $this->helper->getReviewUrl();
+    }
+
+    /**
+     * @param array $installedExts
+     * @return array
+     */
+    public function prepareMarketplaceReviewUrls($installedExts)
+    {
+        $result = [];
+        foreach ($installedExts as $code => $extension) {
+            $result[$code] = $this->escapeUrl($extension->getMarketplaceLink());
+        }
+
+        return $result;
+    }
+
+    /**
+     * @param $extension
+     * @return mixed
+     */
+    public function getExtensionChangelogUrl($extension)
+    {
+        $url = $this->getExtensionUrl($extension, $isMarketplaceUrl);
+
+        if ($isMarketplaceUrl) {
+            return $url . '#product.info.details.release_notes';
+        }
+
+        return $url . '#changelog';
+    }
+
+    /**
+     * @param $extension
+     * @return mixed
+     */
+    public function getExtensionUrl($extension, &$isMarketplaceUrl = false)
+    {
+        if (Data::USE_MARKETPLACE_URL) {
+
+            [$url] = explode('#', $extension->getMarketplaceLink());
+
+            if ($url) {
+                $isMarketplaceUrl = true;
+                return $url;
+            }
+        }
+
+        return $extension->getUrl();
+    }
+
+    /**
+     * @return string
+     */
+    public function getStoreUrl()
+    {
+        return $this->helper->getStoreUrl();
+    }
+
+    /**
+     * @param string $name
+     * @return string
+     */
+    public function getExtensionVersion($name)
+    {
+        return $this->metaPackageList->getInstalledVersion($name);
+    }
+}
