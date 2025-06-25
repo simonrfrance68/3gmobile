@@ -1,2 +1,0 @@
-# MageWorx_Info
-
